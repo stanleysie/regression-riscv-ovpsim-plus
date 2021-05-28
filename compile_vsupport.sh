@@ -1,0 +1,1 @@
+riscv-none-embed-gcc vsupport.c -o vsupport.o -Wall -Werror -Isupport -mabi=lp64d -march=rv64gc -g -DVVER=8 -Wl,--start-group,-lg,-lgloss,--end-group -lm -Wa,-march=rv64gv -c
