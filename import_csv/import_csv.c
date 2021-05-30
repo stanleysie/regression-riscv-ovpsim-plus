@@ -42,7 +42,7 @@ int importCSV(const char* path, float *matrix, int rows, int columns, bool stric
         if(verbose){
             printf("%d, \n", i);
         }
-        
+         
         i++;
         
     }
@@ -61,13 +61,6 @@ int main(){
     matrix = malloc(rows * columns * sizeof *matrix);
 
     importCSV("test.csv", matrix, rows, columns, true, false);
-   
-    v512P X1 = malloc(sizeof(v512T));
-    v512P X2 = malloc(sizeof(v512T));
-    v512P X3 = malloc(sizeof(v512T));
-	v512P Y = malloc(sizeof(v512T));
-
-    
 
     free(matrix);
 }
