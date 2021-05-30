@@ -15,7 +15,7 @@ int importCSV(const char* path, float *matrix, int rows, int columns, bool stric
         return -1;
     }
 
-
+ 
     while((line=fgets(buffer,sizeof(buffer),fstream))!=NULL){
         if(i>=rows){
             printf("rows exceeded row limit\n");
