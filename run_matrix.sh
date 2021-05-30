@@ -1,0 +1,1 @@
+riscvOVPsimPlus.exe --variant RV64GCV --program MatrixOperations.elf --override riscvOVPsim/cpu/vector_version=0.8

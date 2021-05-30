@@ -29,16 +29,12 @@ typedef unsigned char          Uns8;
 typedef unsigned short         Uns16;
 typedef unsigned int           Uns32;
 typedef unsigned long long int Uns64;
-typedef float				   Flt8;	// added
-typedef float				   Flt16;	// added
 typedef float                  Flt32;
 typedef double                 Flt64;
 
 typedef union v512U {
     Uns8   vu8[VEC8];
-    Flt8   vf8[VEC8];	// added
     Uns16  vu16[VEC16];
-    Flt16  vf16[VEC16];	// added
     Uns32  vu32[VEC32];
     Flt32  vf32[VEC32];
     Uns64  vu64[VEC64];
