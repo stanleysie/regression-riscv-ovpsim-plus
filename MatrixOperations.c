@@ -59,7 +59,7 @@ main() {
 	int row = 100, col = 16;
 	float num = 100.5;
 	if(col > VEC32) {
-		printf("[Error] - number of columns exceed the capacity of registers.\n\n");
+		printf("[Error] - number of columns exceeded the capacity of registers.\n\n");
 		return 1;
 	}
 	
