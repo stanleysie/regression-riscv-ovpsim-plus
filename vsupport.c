@@ -46,7 +46,7 @@ void printVEC(v512P v, Uns8 wid, const char *fmt) {
     int idx;
     char format[64];
 
-    if        (wid==8)  {
+    if (wid==8)  {
         sprintf(format, "REPORT: v8[%%02d] = %s\n", fmt);
         for(idx=0; idx<VEC8; idx++) {
             printf(format, idx, v->vu8[idx]);
