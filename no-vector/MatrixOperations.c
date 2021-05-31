@@ -4,77 +4,47 @@
 #include "MatrixOperations.h"
 
 void matrix_matrix_add(int row, int col, MATRIX A, MATRIX B, MATRIX C) {
-	int i;
+	int i, j;
 	for(i = 0; i < row; i++) {
-		asm(
-			"vsetvli	t0, %0, e32	\n"
-			"vlw.v		v0, (%1)	\n"
-			"vlw.v		v1, (%2)	\n"
-			"vfadd.vv	v2, v0, v1	\n"
-			"vsw.v		v2, (%3)	\n"
-			:
-			: "r"(col), "r"(A.mem[i]), "r"(B.mem[i]), "r"(C.mem[i])
-		);	
+		for(j = 0; j < col; j++) {
+			C.mem[i]->vf32[j] = A.mem[i]->vf32[j] + B.mem[i]->vf32[j];
+		}
 	}
 }
 
 void matrix_matrix_sub(int row, int col, MATRIX A, MATRIX B, MATRIX C) {
-	int i;
+	int i, j;
 	for(i = 0; i < row; i++) {
-		asm(
-			"vsetvli	t0, %0, e32	\n"
-			"vlw.v		v0, (%1)	\n"
-			"vlw.v		v1, (%2)	\n"
-			"vfsub.vv	v2, v0, v1	\n"
-			"vsw.v		v2, (%3)	\n"
-			:
-			: "r"(col), "r"(A.mem[i]), "r"(B.mem[i]), "r"(C.mem[i])
-		);	
+		for(j = 0; j < col; j++) {
+			C.mem[i]->vf32[j] = A.mem[i]->vf32[j] - B.mem[i]->vf32[j];
+		}	
 	}
 }
 
 void matrix_scalar_add(int row, int col, MATRIX A, float num, MATRIX C) {
-	int i;
+	int i, j;
 	for(i = 0; i < row; i++) {
-		asm(
-			"vsetvli	t0, %0, e32	\n"
-			"vlw.v		v0, (%1)	\n"
-			"flw		f0, 0(%2)	\n"
-			"vfadd.vf	v1, v0, f0	\n"
-			"vsw.v		v1, (%3)	\n"
-			:
-			: "r"(col), "r"(A.mem[i]), "r"(&num), "r"(C.mem[i])
-		);
+		for(j = 0; j < col; j++) {
+			C.mem[i]->vf32[j] = A.mem[i]->vf32[j] + num;
+		}
 	}
 }
 
 void matrix_scalar_sub(int row, int col, MATRIX A, float num, MATRIX C) {
-	int i;
+	int i, j;
 	for(i = 0; i < row; i++) {
-		asm(
-			"vsetvli	t0, %0, e32	\n"
-			"vlw.v		v0, (%1)	\n"
-			"flw		f0, 0(%2)	\n"
-			"vfsub.vf	v1, v0, f0	\n"
-			"vsw.v		v1, (%3)	\n"
-			:
-			: "r"(col), "r"(A.mem[i]), "r"(&num), "r"(C.mem[i])
-		);
+		for(j = 0; j < col; j++) {
+			C.mem[i]->vf32[j] = A.mem[i]->vf32[j] - num;
+		}
 	}
 }
 
 void matrix_scalar_mul(int row, int col, MATRIX A, float num, MATRIX C) {
-	int i;
+	int i, j;
 	for(i = 0; i < row; i++) {
-		asm(
-			"vsetvli	t0, %0, e32	\n"
-			"vlw.v		v0, (%1)	\n"
-			"flw		f0, 0(%2)	\n"
-			"vfmul.vf	v1, v0, f0	\n"
-			"vsw.v		v1, (%3)	\n"
-			:
-			: "r"(col), "r"(A.mem[i]), "r"(&num), "r"(C.mem[i])
-		);
+		for(j = 0; j < col; j++) {
+			C.mem[i]->vf32[j] = A.mem[i]->vf32[j] * num;
+		}
 	}
 }
 
