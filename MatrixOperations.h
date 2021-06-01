@@ -10,3 +10,4 @@ void matrix_matrix_mul(int row, int col, int len, float A[][len], float B[][col]
 void matrix_scalar_add(int row, int col, float A[][col], float num, float C[][col]);
 void matrix_scalar_sub(int row, int col, float A[][col], float num, float C[][col]);
 void matrix_scalar_mul(int row, int col, float A[][col], float num, float C[][col]);
+void matrix_transpose(int row, int col, float A[][col], float B[][row]);

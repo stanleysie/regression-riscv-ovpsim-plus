@@ -110,6 +110,15 @@ void matrix_scalar_mul(int row, int col, float A[][col], float num, float C[][co
 	}
 }
 
+void matrix_transpose(int row, int col, float A[][col], float B[][row]) {
+	int i, j;
+	for(i = 0; i < row; i++) {
+		for(j = 0; j < col; j++) {
+			B[j][i] = A[i][j];
+		}
+	}
+}
+
 void print_matrix(int row, int col, float M[][col], char s[]) {
 	int i, j;
 	printf("\n%s\n", s);

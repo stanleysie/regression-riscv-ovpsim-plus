@@ -265,6 +265,25 @@ void matrix_scalar_mul(int row, int col, float A[][col], float num, float C[][co
 	}
 }
 
+void matrix_transpose(int row, int col, float A[][col], float B[][row]) {
+	int i;
+	for(i = 0; i < row; i++) {
+		asm(
+			"ltrans:					\n"
+			"	vsetvli		t0, %0, e32	\n"
+			"	vlw.v		v0, (%1)	\n"
+			"	sub			%0, %0, t0	\n"
+			"	slli		t0, t0, 2	\n"
+			"	add			%1, %1, t0	\n"
+			"	vssw.v		v0, (%2), %3\n"
+			"	add			%2, %2, t0	\n"
+			"	bnez		%0, ltrans	\n"
+			:
+			: "r"(col), "r"(&A[i][0]), "r"(&B[0][i]), "r"(row*4)
+		);
+	}
+}
+
 void print_matrix(int row, int col, float M[][col], char s[]) {
 	int i, j;
 	printf("\n%s\n", s);
