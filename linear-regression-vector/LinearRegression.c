@@ -2,14 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "vsupport.h"
-#include "MatrixOperations.h"
-
-#define DATA_SIZE 30
-
-typedef struct {
-	float yearsExperience;
-	float salary;
-} DATA;
 
 void vector_vector_add(int col, float A[], float B[], float C[]) {
 	asm(
@@ -68,7 +60,7 @@ void vector_vector_mul(int col, float A[], float B[], float C[]) {
 	);	
 }
 
-void vector_scalar_add(int col, float A[], float num, float C[]) {
+void vector_scalar_add(int col, float A[], float num, float B[]) {
 	asm(
 		"vsadd:						\n"
 		"	vsetvli		t0, %0, e32	\n"
@@ -82,11 +74,11 @@ void vector_scalar_add(int col, float A[], float num, float C[]) {
 		"	add			%3, %3, t0	\n"
 		"	bnez		%0, vsadd	\n"
 		:
-		: "r"(col), "r"(&A[0]), "r"(&num), "r"(&C[0])
+		: "r"(col), "r"(&A[0]), "r"(&num), "r"(&B[0])
 	);
 }
 
-void vector_scalar_sub(int col, float A[], float num, float C[]) {
+void vector_scalar_sub(int col, float A[], float num, float B[]) {
 	asm(
 		"vssub:						\n"
 		"	vsetvli		t0, %0, e32	\n"
@@ -100,11 +92,11 @@ void vector_scalar_sub(int col, float A[], float num, float C[]) {
 		"	add			%3, %3, t0	\n"
 		"	bnez		%0, vssub	\n"
 		:
-		: "r"(col), "r"(&A[0]), "r"(&num), "r"(&C[0])
+		: "r"(col), "r"(&A[0]), "r"(&num), "r"(&B[0])
 	);
 }
 
-void vector_scalar_mul(int col, float A[], float num, float C[]) {
+void vector_scalar_mul(int col, float A[], float num, float B[]) {
 	asm(
 		"vsmul:						\n"
 		"	vsetvli		t0, %0, e32	\n"
@@ -118,8 +110,17 @@ void vector_scalar_mul(int col, float A[], float num, float C[]) {
 		"	add			%3, %3, t0	\n"
 		"	bnez		%0, vsmul	\n"
 		:
-		: "r"(col), "r"(&A[0]), "r"(&num), "r"(&C[0])
+		: "r"(col), "r"(&A[0]), "r"(&num), "r"(&B[0])
 	);
+}
+
+void print_vector(int col, float V[], char s[]) {
+	int i;
+	printf("\n%s\n", s);
+	for(i = 0; i < col; i++) {
+		printf("%.2f\t", V[i]);
+	}
+	printf("\n");
 }
 
 void matrix_matrix_add(int row, int col, float A[][col], float B[][col], float C[][col]) {
@@ -202,7 +203,7 @@ void matrix_matrix_mul(int row, int col, int len, float A[][len], float B[][col]
 	}
 }
 
-void matrix_scalar_add(int row, int col, float A[][col], float num, float C[][col]) {
+void matrix_scalar_add(int row, int col, float A[][col], float num, float B[][col]) {
 	int i;
 	for(i = 0; i < row; i++) {
 		asm(
@@ -218,12 +219,12 @@ void matrix_scalar_add(int row, int col, float A[][col], float num, float C[][co
 			"	add			%3, %3, t0	\n"
 			"	bnez		%0, lsadd	\n"
 			:
-			: "r"(col), "r"(&A[i][0]), "r"(&num), "r"(&C[i][0])
+			: "r"(col), "r"(&A[i][0]), "r"(&num), "r"(&B[i][0])
 		);
 	}
 }
 
-void matrix_scalar_sub(int row, int col, float A[][col], float num, float C[][col]) {
+void matrix_scalar_sub(int row, int col, float A[][col], float num, float B[][col]) {
 	int i;
 	for(i = 0; i < row; i++) {
 		asm(
@@ -239,12 +240,12 @@ void matrix_scalar_sub(int row, int col, float A[][col], float num, float C[][co
 			"	add			%3, %3, t0	\n"
 			"	bnez		%0, lssub	\n"
 			:
-			: "r"(col), "r"(&A[i][0]), "r"(&num), "r"(&C[i][0])
+			: "r"(col), "r"(&A[i][0]), "r"(&num), "r"(&B[i][0])
 		);
 	}
 }
 
-void matrix_scalar_mul(int row, int col, float A[][col], float num, float C[][col]) {
+void matrix_scalar_mul(int row, int col, float A[][col], float num, float B[][col]) {
 	int i;
 	for(i = 0; i < row; i++) {
 		asm(
@@ -260,7 +261,7 @@ void matrix_scalar_mul(int row, int col, float A[][col], float num, float C[][co
 			"	add			%3, %3, t0	\n"
 			"	bnez		%0, lsmul	\n"
 			:
-			: "r"(col), "r"(&A[i][0]), "r"(&num), "r"(&C[i][0])
+			: "r"(col), "r"(&A[i][0]), "r"(&num), "r"(&B[i][0])
 		);
 	}
 }
@@ -296,7 +297,7 @@ void print_matrix(int row, int col, float M[][col], char s[]) {
 	printf("\n");
 }
 
-void load_data(DATA *dataset) {
+void load_data(float X[], float Y[]) {
 	FILE *fp;
 	
 	fp = fopen("linear_dataset.csv", "r");
@@ -316,9 +317,9 @@ void load_data(DATA *dataset) {
 			
 			while(data) {
 				if(column == 0) {
-					dataset[row - 2].yearsExperience = atof(data);
+					X[row - 2] = atof(data);
 				} else if(column == 1) {
-					dataset[row - 2].salary = atof(data);
+					Y[row - 2] = atof(data);
 				}
 				data = strtok(NULL, ", ");
 				column++;
@@ -334,36 +335,30 @@ main() {
 	enableVEC();
 	enableFP();
 	
-	DATA dataset[DATA_SIZE];
-	load_data(dataset);
+	int i, n = 30;
 	
-	float X[DATA_SIZE];
-	float Y[DATA_SIZE];
-	float XX[DATA_SIZE];
-	float XY[DATA_SIZE];
+	float X[n];
+	float Y[n];
+	float XX[n];
+	float XY[n];
 	
-	int i;
-	for(i = 0; i < DATA_SIZE; i++) {
-		X[i] = dataset[i].yearsExperience;
-		Y[i] = dataset[i].salary;
-	}
+	load_data(X, Y);
 	
-	vector_vector_mul(DATA_SIZE, X, X, XX);
-	vector_vector_mul(DATA_SIZE, X, Y, XY);
+	vector_vector_mul(n, X, X, XX);
+	vector_vector_mul(n, X, Y, XY);
 	
 	float sumX = 0, sumY = 0, sumXX = 0, sumXY = 0;
-	for(i = 0; i < DATA_SIZE; i++) {
+	for(i = 0; i < n; i++) {
 		sumX += X[i];
 		sumY += Y[i];
 		sumXX += XX[i];
 		sumXY += XY[i];
 	}
 	
-	float b = (DATA_SIZE*sumXY - sumX*sumY) / (DATA_SIZE*sumXX - sumX*sumX);
-	float a = (sumY - b*sumX) / DATA_SIZE;
+	float b = (n*sumXY - sumX*sumY) / (n*sumXX - sumX*sumX);
+	float a = (sumY - b*sumX) / n;
 	
-	printf("\nValues are: a = %0.2f and b = %0.2f\n",a,b);
- 	printf("Equation of best fit is: y = %0.2f + %0.2fx\n\n",a,b);
+ 	printf("\nEquation of best fit is: y = %0.2fx + %0.2f\n\n", a, b);
 	
 	return 0;
 }
