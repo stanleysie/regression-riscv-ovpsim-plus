@@ -1,0 +1,1 @@
+riscv-none-embed-gcc LinearRegression.c ../vsupport.o -o LinearRegression.elf  -Wall -Werror -Isupport -mabi=lp64d -march=rv64gc -g -DVVER=8 -Wl,--start-group,-lg,-lgloss,--end-group -lm -Wa,-march=rv64gv

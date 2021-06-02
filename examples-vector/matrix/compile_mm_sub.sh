@@ -1,0 +1,1 @@
+riscv-none-embed-gcc Matrix-Matrix-Subtraction.c ../../vsupport.o -o Matrix-Matrix-Subtraction.elf  -Wall -Werror -Isupport -mabi=lp64d -march=rv64gc -g -DVVER=8 -Wl,--start-group,-lg,-lgloss,--end-group -lm -Wa,-march=rv64gv

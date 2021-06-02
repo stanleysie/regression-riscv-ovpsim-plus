@@ -1,0 +1,1 @@
+riscv-none-embed-gcc Matrix-Matrix-Multiplication.c ../../vsupport.o -o Matrix-Matrix-Multiplication.elf  -Wall -Werror -Isupport -mabi=lp64d -march=rv64gc -g -DVVER=8 -Wl,--start-group,-lg,-lgloss,--end-group -lm -Wa,-march=rv64gv
