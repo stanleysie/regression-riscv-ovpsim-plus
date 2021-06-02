@@ -71,7 +71,7 @@ Visit www.IMPERAS.com for multicore debug, verification and analysis solutions.
 ```
 <br/>
 
-Aside from Linear Regression, other vector implementation available in this repository are the following:
+Aside from Linear Regression, other vector implementations available in this repository are the following:
 * Matrix Addition
 * Matrix Subtraction
 * Matrix Multiplication
