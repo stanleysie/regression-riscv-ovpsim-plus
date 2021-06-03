@@ -1,1 +1,0 @@
-riscv-none-embed-gcc import_csv.c vsupport.o -o import_csv.elf  -Wall -Werror -Isupport -mabi=lp64d -march=rv64gc -g -DVVER=8 -Wl,--start-group,-lg,-lgloss,--end-group -lm -Wa,-march=rv64gv
