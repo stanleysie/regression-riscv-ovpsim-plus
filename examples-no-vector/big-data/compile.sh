@@ -1,0 +1,13 @@
+./compile_mm_add.sh
+./compile_mm_sub.sh
+./compile_mm_mul.sh
+./compile_m_transpose.sh
+./compile_ms_add.sh
+./compile_ms_sub.sh
+./compile_ms_mul.sh
+./compile_vs_add.sh
+./compile_vs_sub.sh
+./compile_vs_mul.sh
+./compile_vv_add.sh
+./compile_vv_sub.sh
+./compile_vv_mul.sh
