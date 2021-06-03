@@ -1,1 +1,1 @@
-riscv-none-embed-gcc LogisticRegression.c ../vsupport.o -o LogisticRegression.elf  -Wall -Werror -Isupport -mabi=lp64d -march=rv64gc -g -DVVER=8 -Wl,--start-group,-lg,-lgloss,--end-group -lm -Wa,-march=rv64gv
+riscv-none-embed-gcc LogisticRegression.c ../matrixoperations.o -o LogisticRegression.elf  -Wall -Werror -Isupport -mabi=lp64d -march=rv64gc -g -DVVER=8 -Wl,--start-group,-lg,-lgloss,--end-group -lm -Wa,-march=rv64gv
