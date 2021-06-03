@@ -1,12 +1,16 @@
 # **Linear Regression with Vector Processor using riscvOVPsimPlus**
 
-This is a simple implementation of Linear Regression with Vector Processor using riscvOVPsimPlus.
+This is a simple implementation of Linear Regression with RISC-V Vector Extension in C, compiled and run using riscvOVPsimPlus. For each program, we provided a copy of them coded in pure C language to compare the performance of the vector extension.
 
 # **Program Setup**
 ## **riscvOVPsimPlus Setup**
 Please refer to our [riscvOVPsimPlus Setup](https://github.com/stanleysie/riscv-ovpsim-plus-demo) repository.
 <br/><br/>
+
 ## **Compile the Support files**
+
+This will generate `vsupport.o` which will be used for all compilation of programs in this repository.
+
 ```
 # run this command in Ubuntu Terminal
 
@@ -14,10 +18,17 @@ $ ./compile_vsupport.sh
 ```
 
 ## **Compilation and Running**
+
 ```
 # run these commands in Ubuntu Terminal
 
-cd linear-regression-vector
+# LINEAR REGRESSION WITH VECTOR EXTENSION
+$ cd linear-regression-vector
+$ ./compile_linear_regression.sh
+$ ./run_linear_regression.sh
+
+# LINEAR REGRESSION WITHOUT VECTOR EXTENSION
+$ cd linear-regression-no-vector
 $ ./compile_linear_regression.sh
 $ ./run_linear_regression.sh
 ```
@@ -71,7 +82,10 @@ Visit www.IMPERAS.com for multicore debug, verification and analysis solutions.
 ```
 <br/>
 
+#  **Matrix and Vector Examples**
+
 Aside from Linear Regression, other vector implementations available in this repository are the following:
+
 * Matrix Addition
 * Matrix Subtraction
 * Matrix Multiplication
@@ -91,7 +105,13 @@ Aside from Linear Regression, other vector implementations available in this rep
 ```
 # run these commands in Ubuntu Terminal
 
+# MATRIX OPERATIONS WITH VECTOR EXTENSION
 $ cd examples-vector/matrix
+$ ./compile.sh
+$ ./run.sh
+
+# MATRIX OPERATIONS WITHOUT VECTOR EXTENSION
+$ cd examples-no-vector/matrix
 $ ./compile.sh
 $ ./run.sh
 ```
@@ -99,10 +119,37 @@ $ ./run.sh
 ```
 # run these commands in Ubuntu Terminal
 
+# VECTOR OPERATIONS WITH VECTOR EXTENSION
 $ cd examples-vector/vector
 $ ./compile.sh
 $ ./run.sh
+
+# VECTOR OPERATIONS WITHOUT VECTOR EXTENSION
+$ cd examples-no-vector/vector
+$ ./compile.sh
+$ ./run.sh
 ```
+# **Matrix and Vector Examples on Big Data**
+
+Also provided in the repository a sample performance of matrix and vector operations using Vector Extension on big data.
+
+## **Compilation and Running for Matrix and Vector Examples on Big Data**
+
+```
+# run these commands in Ubuntu Terminal
+
+# WITH VECTOR EXTENSION
+$ cd examples-vector/big-data
+$ ./compile.sh
+$ ./run.sh
+
+# WITHOUT VECTOR EXTENSION
+$ cd examples-no-vector/big-data
+$ ./compile.sh
+$ ./run.sh
+```
+
 # **Authors**
+
 * John Andrew Ing
 * Stanley Lawrence Sie
