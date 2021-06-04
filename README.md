@@ -14,7 +14,7 @@ This will generate `vsupport.o` which will be used for all compilation of progra
 ```
 # run this command in Ubuntu Terminal
 
-$ ./compile_vsupport.sh
+$ ./compile_matrixoperations.sh
 ```
 
 ## **Compilation and Running**
