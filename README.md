@@ -1,4 +1,4 @@
-# **Linear Regression with Vector Processor using riscvOVPsimPlus**
+# **Linear Regression and Logistic Regression with Vector Processor using riscvOVPsimPlus**
 
 This is a simple implementation of Linear Regression with RISC-V Vector Extension in C, compiled and run using riscvOVPsimPlus. For each program, we provided a copy of them coded in pure C language to compare the performance of the vector extension.
 
@@ -150,9 +150,11 @@ $ ./run.sh
 ```
 
 ## **Sample Showcase on Logistic Regression**
+```
 cd logistic-regression-vector
 ./compile_logistic.sh
 ./run_logistic.sh
+```
 
 # **Authors**
 
