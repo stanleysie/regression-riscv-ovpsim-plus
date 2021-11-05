@@ -151,9 +151,7 @@ $ ./run.sh
 
 ## **Sample Showcase on Logistic Regression**
 ```
-cd logistic-regression-vector
-./compile_logistic.sh
-./run_logistic.sh
+$ cd logistic-regression-vector ./compile_logistic.sh ./run_logistic.sh
 ```
 
 # **Authors**
